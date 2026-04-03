@@ -76,20 +76,23 @@ export const SpellingBeeActions = PUZZLE_ACTIONS({
 type SpellingBeeActions = typeof SpellingBeeActions;
 
 
-const DICTIONARY = ["apple", "banana", "orange"];
+
+// These are not exactly the real spelling bee rules. They're just placeholders.
+const TEST_WORDS = ["apple", "banana", "orange"];
 
 export class SpellingBeeGame implements PuzzleWithActions<SpellingBeeActions> {
   
-  public guess(params: GuessParams): GuessResult {
+  public guess(params: GuessParams) {
     const { guessed_word } = params;
     if (guessed_word.length < 4) {
       return { status: "completed", evaluation: { kind: "invalid", reason: "too_short" } };
     }
 
-    if (DICTIONARY.includes(guessed_word)) {
-      return { status: "completed", evaluation: { kind: "valid", is_pangram: false, points_earned: 1 } };
+    if (TEST_WORDS.includes(guessed_word)) {
+      const is_pangram = false; // Placeholder, assume pangram logic is here
+      return { status: "completed", evaluation: { kind: "valid", points_earned: 1 } };
     }
-    return { status: "completed", evaluation: { kind: "invalid", reason: "not_in_dictionary" } };
+    return { evaluation: { kind: "invalid", reason: "not_in_dictionary" } };
   }
 
   public shuffle(_params: ShuffleParams): ShuffleResult {

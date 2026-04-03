@@ -163,6 +163,22 @@ export type PuzzleWithActions<T extends PuzzleActionManifest> = {
 };
 ```
 
+**Task 4c**: Now check the `attempt_guess` method in `SpellingBeeGame`. You should see a type error because the function signature doesn't match `AttemptActionFunction`. 
+
+The issue is that `attempt_guess` has no explicit return type annotation, so TypeScript infers it from the return statements - but that inferred type doesn't match `GuessResult`. Add the return type annotation `: GuessResult` to the method signature:
+
+```typescript
+public attempt_guess(params: GuessParams): GuessResult {
+```
+
+Now you should see errors *inside* the method body. There are two bugs in the implementation:
+1. One return statement is missing a required property
+2. Another return statement is missing a different required property
+
+Fix these bugs to match the `GuessResult` schema.
+
+This illustrates a key benefit of our abstraction: by defining action schemas and enforcing that `attempt_*` methods match them, we catch implementation bugs at compile time. The schema serves as a contract that both the type system and runtime validation can enforce. Of course, you could also get this sort of compiler support if the individual SpellingBee class defined its own `GuessParams` and `GuessResult` types, but by using a manifest and generic types, we can create reusable abstractions that work across different puzzles with different actions.
+
 ### Task 5: Create the `attemptAction` Function
 
 Now let's create a generic function that can invoke any action on a puzzle, given the action name and parameters.

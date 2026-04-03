@@ -1,18 +1,16 @@
 
 import { z, type ZodType } from "zod";
 
+export type AttemptedResultStatus = "rejected" | "completed";
 
 // TASK 2a - Define PuzzleActionSpec
+// TASK 3d, come back later to add ResultsSchemaBase constraint
 
 
 
 
-// TASK 3a, 3b - Define PuzzleActionManifest using a mapped type, then as a Record
-
-
-
-
-// TASK 3b - Refactor PuzzleActionManifest to use Record
+// TASK 3a, 3b - Define PuzzleActionManifest using a mapped
+// type, then refactor to use a Record
 
 
 
@@ -22,8 +20,7 @@ import { z, type ZodType } from "zod";
 
 
 
-// TASK 3d - Add ResultsSchemaBase constraint
-export type AttemptedResultStatus = "rejected" | "completed";
+// TASK 3d - see above alongside TASK 2a
 
 
 

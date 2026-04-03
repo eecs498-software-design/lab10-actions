@@ -139,6 +139,8 @@ export type PuzzleWithActions<T extends PuzzleActionManifest> = {
 
 Once you have this, check `src/spelling_bee.ts`. The `SpellingBeeGame` class should now have type errors because it implements `PuzzleWithActions<SpellingBeeActions>` but its method names don't match! Rename the methods from `guess` and `shuffle` to `attempt_guess` and `attempt_shuffle`. Also uncomment the `give_hint` method you created in Task 1 and rename it to `attempt_hint`.
 
+In task 4b, we'll replace the `any` types with properly inferred function types based on the action specs in the manifest.
+
 **Task 4b**: Now let's properly type the action methods. We need helper types to extract the params and results types from a manifest:
 
 ```typescript

@@ -9,21 +9,21 @@ const GuessParamsSchema = z.object({
   guessed_word: z.string().toLowerCase(),
 }).readonly();
 const GuessResultsSchema = z.discriminatedUnion("status", [
-  z.object({
+  z.object({  // rejected, word that has already been guessed
     status: z.literal("rejected"),
     reason: z.enum(["duplicate"]),
   }).readonly(),
-  z.object({
+  z.object({  // completed, with evaluation of the guessed word
     status: z.literal("completed"),
     evaluation: z.discriminatedUnion("kind", [
-      z.object({
+      z.object({  // valid word worth points
         kind: z.literal("valid"),
         is_pangram: z.boolean(),
         points_earned: z.number().int().nonnegative(),
       }).readonly(),
-      z.object({
+      z.object({  // invalid word that broke the rules
         kind: z.literal("invalid"),
-        reason: z.enum(INVALID_WORD_REASONS),
+        reason: z.enum(INVALID_WORD_REASONS), // which rule was broken
       }).readonly(),
     ]),
   }).readonly(),

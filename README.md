@@ -123,7 +123,7 @@ type Remapped<T> = {
 
 The `K & string` is needed because `keyof T` might include `symbol` or `number` keys, and template literal types only work with strings.
 
-First, let's create a helper type to extract just the string keys:
+However, the use of & here is essentially a cast and could be unsafe. Instead, let's create a helper type to extract just the string keys from the original keys of T:
 
 ```typescript
 type StringKeyOf<T> = Extract<keyof T, string>;

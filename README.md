@@ -195,7 +195,7 @@ export function attemptAction<T extends PuzzleActionManifest, K extends StringKe
   params: ____
 ): ____ {
   const attempt_fn = game[`attempt_${action_kind}` as `attempt_${K}`] as AttemptActionFunction<T, K>;
-  return attempt_fn(____);
+  return attempt_fn.call(game, ____);
 }
 ```
 
